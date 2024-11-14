@@ -15,7 +15,7 @@ describe('Test the seeding input page', () => {
     })
 
     it('Katey-Check Data section the date input element has the default value of the current date', () => {
-        cy.get('[data-cy=date-select').should("have.value",2024-11-14)
+        cy.get('[data-cy=date-select').should("have.value","2024-11-14")
     })
 
     it('Katey-Check Data section the crop drop down is enabled', () => {
