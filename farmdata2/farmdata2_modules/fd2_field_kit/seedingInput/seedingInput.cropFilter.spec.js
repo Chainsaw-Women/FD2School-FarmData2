@@ -5,6 +5,7 @@ describe('Test Crop Filter', () => {
     beforeEach(() => {
         cy.login('manager1', 'farmdata2')
         cy.visit('/farm/fd2-field-kit/seedingInput')
+        cy.waitForPage()
     })
     it('Check if multiple different crops are in the table when “All” is selected in the Crop filter', () => {
         //hillary
