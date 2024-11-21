@@ -8,7 +8,6 @@ describe('Test Crop Filter', () => {
         cy.waitForPage()
     })
     it('Check if multiple different crops are in the table when “All” is selected in the Crop filter', () => {
-        //hillary
         cy.get('[data-cy=start-date-select]')
             .type('2019-10-01')
         cy.get('[data-cy=end-date-select]')
