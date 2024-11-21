@@ -33,11 +33,7 @@ describe('Test Crop Filter', () => {
             .invoke('text')
             .then(crop => {
                 expect(crop, 'TURNIP')
-        })
-        // cy.get('[data-cy=r2-Crop]')
-        //     .should('have.value', 'SPINACH')
-        // cy.get('[data-cy=r7-Crop]')
-        //     .should('have.value', 'TURNIP')   
+        })  
         cy.get('[data-cy=table-body]').children()
             .should('have.length', '8')
     })
