@@ -94,7 +94,20 @@ describe('Test Crop Filter', () => {
 
 
     })
-    it('Check the dropdown for the Crop filter only has crops with seeding logs in the date range', () => {
+    it("Check the dropdown for the Crop filter only has crops with seeding logs in the date range", () => {
         //anne
-    })
+        cy.get("[data-cy=crop-dropdown]").should("exist");
+    
+        cy.get("[data-cy=start-date-select]").should("exist").type("2019-01-01");
+    
+        cy.get("[data-cy=end-date-select]").should("exist").type("2019-03-01");
+    
+        cy.get("[data-cy=date-select]").each(($el, index, $all) => {
+          if (index == 0) {
+            expect($el).to.have.value("2019-01-01");
+          } else if (index == 1) {
+            expect($el).to.have.value("2019-03-01");
+          }
+        });
+      });
 })
