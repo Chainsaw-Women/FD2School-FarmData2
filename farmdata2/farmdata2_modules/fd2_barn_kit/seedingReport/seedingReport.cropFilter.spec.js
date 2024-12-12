@@ -36,16 +36,63 @@ describe('Test Crop Filter', () => {
         cy.get('[data-cy=table-body]').children()
             .should('have.length', '8')
     })
-    it('Check the table only have seeding logs for selected crop', () => {
+    it('Check the table only have seeding logs for selected crop (Garlic)', () => {
         //Katey 
+        //Set the date range for the report
+        cy.get("[data-cy=date-range-selection]>[data-cy=start-date-select]>[data-cy=date-select]")
+            .type('2012-01-01');
+        cy.get("[data-cy=date-range-selection]>[data-cy=end-date-select]>[data-cy=date-select]")
+            .type('2020-12-12');
 
-        cy.get("[data-cy=start-date-select]>[data-cy=date-select]").select('2020-01-01');
-        cy.get("[data-cy=start-date-select]>[data-cy=date-select]").select('2024-11-20');
-        cy.get("[data-cy=generate-rpt-btn]").click();
+        //generate report table
+        cy.get("[data-cy=generate-rpt-btn]")
+            .click();
 
-        cy.get("[data-cy=crop-selection] > [data-cy=dropdown-input] > [data-cy=option24]").should("contain.text", "GARLIC");
+        //check that report table exists
+        cy.get("[data-cy=report-table]")
+            .should("exist");
+        cy.get("[data-cy=table]")
+            .should("exist");
 
-        cy.get("[data-cy=td-r0c1]>[data-cy=r0-Crop]").should("contain.text", "GARLIC");
+        //select the test crop 
+        cy.get("[data-cy=crop-dropdown] > [data-cy=dropdown-input]")
+            .select("GARLIC");
+
+        //check that the text in the crop columns are equivalent to the target crop (checked two different cells)
+        cy.get("[data-cy=table]>[data-cy=table-body]>[data-cy=r1]>[data-cy=td-r1c1]>[data-cy=r1-Crop]")
+            .should("have.text", "GARLIC");
+        cy.get("[data-cy=table]>[data-cy=table-body]>[data-cy=r3]>[data-cy=td-r3c1]>[data-cy=r3-Crop]")
+            .should("have.text", "GARLIC");
+    })
+    it('Secondary check the table only have seeding logs for selected crop(Bell-peppers)', () => {
+        //Katey
+        //Set the date range for the report
+        cy.get("[data-cy=date-range-selection]>[data-cy=start-date-select]>[data-cy=date-select]")
+            .type('2011-01-01');
+        cy.get("[data-cy=date-range-selection]>[data-cy=end-date-select]>[data-cy=date-select]")
+            .type('2020-12-12');
+
+        //generate report table
+        cy.get("[data-cy=generate-rpt-btn]")
+            .click();
+
+        //check that report table exists
+        cy.get("[data-cy=report-table]")
+            .should("exist");
+        cy.get("[data-cy=table]")
+            .should("exist");
+
+        //select the test crop 
+        cy.get("[data-cy=crop-dropdown] > [data-cy=dropdown-input]")
+            .select("PEPPERS-BELL");
+
+        //check that the text in the crop columns are equivalent to the target crop (checked two different cells)
+        cy.get("[data-cy=table]>[data-cy=table-body]>[data-cy=r1]>[data-cy=td-r1c1]>[data-cy=r1-Crop]")
+            .should("have.text", "PEPPERS-BELL");
+        cy.get("[data-cy=table]>[data-cy=table-body]>[data-cy=r3]>[data-cy=td-r3c1]>[data-cy=r3-Crop]")
+            .should("have.text", "PEPPERS-BELL");
+
+
     })
     it('Check the dropdown for the Crop filter only has crops with seeding logs in the date range', () => {
         //anne
